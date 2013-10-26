@@ -13,6 +13,7 @@ public class GameView extends SurfaceView{
 	private SurfaceHolder holder;
 	private GameLoopThread gameLoopThread;
 	private int x = 0;
+	private int xspeed = 1;
 	
 	public GameView(Context context) {
 		super(context);
@@ -50,10 +51,15 @@ public class GameView extends SurfaceView{
 	}
 	protected void onDraw(Canvas canvas)
 	{
-		canvas.drawColor(Color.BLACK);
-		if( x<getWidth() - bmp.getWidth()){
-			x++;
+		if(x == getWidth() - bmp.getWidth())
+		{
+			xspeed = -1;
 		}
+		if(x == 0){
+			xspeed = 1;
+		}
+		x += xspeed;
+		canvas.drawColor(Color.BLACK);
 		canvas.drawBitmap(bmp,x,10,null);
 	}
 
